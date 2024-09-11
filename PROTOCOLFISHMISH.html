@@ -6,7 +6,16 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" />
     <style>
-        .terminal {
+/* Original styles remain the same */
+body {
+    color: green;
+    margin: 10 auto;
+    font-size: 24px;
+    text-shadow: rgba(102, 255, 0, 0.9) 0px 0px 20px;
+    background-color: black;
+    font-family: clacon2;
+}
+.terminal {
             resize: both;
             --color: green;
             --background: black;
@@ -26,20 +35,64 @@
             --font: clacon2;
         }
 
-        @font-face {
+/* CRT scan lines effect */
+body::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0) 3px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Glowing text effect */
+.terminal, #headline {
+    color: rgba(0, 255, 0, 0.9);
+    text-shadow: 0px 0px 15px rgba(0, 255, 0, 0.75), 0px 0px 20px rgba(0, 255, 0, 0.5);
+}
+
+/* Flickering effect for text */
+@keyframes flicker {
+    0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+        opacity: 1;
+    }
+    20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+        opacity: 0.8;
+    }
+}
+
+.terminal, #headline {
+    animation: flicker 0.1s infinite;
+}
+
+/* Maintain your original container styling with slight modifications */
+#terminalContainer {
+    filter: contrast(120%) saturate(80%);
+    border-radius: 10px;
+    box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+/* Keep the original font style */
+body, #terminal {
+    font-family: clacon2;
+    font-size: 1.5em;
+}
+@font-face {
             font-family: clacon2;
             src: url("https://webdraft.hu/fonts/classic-console/fonts/clacon2.ttf");
         }
-        body{
-         color: green;
-        margin: 10 auto;
-            font-size: 24px;
-            text-shadow: rgba(102,255,0,0.9) 0px 0px 20px;
-    background-color: black;
-   
-    font-family: clacon2;  
-        }
-        
+
     </style>
 </head>
     <script> 
@@ -134,7 +187,7 @@ Fish wished there was something he could do to help, to make things better, but 
 
 Despite the sadness, Fishy found some comfort in the love and sickening Smell of his raccoon girlfriend. 
 She was there to offer a warm hug and a listening ear, reminding Fish that he wasn’t alone in this. 
-Together, they hoped for a miracle, for the friend to recover and get back to their old self.
+Together, they PRAYED for a miracle, for the friend to recover and get back to their old self.
 
 Fish will keep holding onto hope, believing that better days are ahead.
 For now, all he can do is be there for his friends, offering support and understanding in these difficult times.
@@ -153,7 +206,7 @@ Type 'next' to see more entries
     document.addEventListener('click', function() {
         const audio = document.getElementById("helpAudio");
         if (audio) {
-            audio.volume = 0.5;
+            audio.volume = 0.3;
             audio.play().catch(error => {
                 console.log("Audio play failed: ", error);
             });
@@ -237,11 +290,6 @@ Type 'next' to see more entries
             this.echo("'hint'   = you might need it");
             this.echo("'diary'  = stay out! Fish eyes only");
 
-            // Play the audio when help is called
-            const audio = document.getElementById("helpAudio");
-            if (audio) {
-                audio.play();
-            }
         },
         system: function() {
             this.error("System health Critical! - Recovered 09/23/2024");
@@ -277,14 +325,42 @@ Type 'next' to see more entries
                 this.echo('No more diary entries.');
                 currentEntry = 0;
             }
-        }
+        },
+        code: function() {
+            this.echo('Please enter unique code:');
+            this.push(function(code) {
+                if (code === 'yGFfxgm1£') {
+                    this.echo('[[;yellow;]Bereavement Protocol Started:]');
+                    this.echo('[[;yellow;]Personel Name: Sheepy]');
+                    this.echo('[[;yellow;]Employment Duration: 24 Years 234 days]');
+                    this.echo('[[;cyan;]Location: ///rival.jammy.molars]');
+                    this.error('Bereavement Protocol will be completed in 3 days');
+                    this.error('EFFECTS IRREVERSIBLE');
+                    this.echo("Please contact info@fishincorporated.uk and reference case *0330221*");
+                    this.echo("Extentisons can be granted on case by case basis");
+                    this.pop();
+                } else if (code === 'FISHYMISHY')  {
+                    this.echo('[[;yellow;]Bereavement Protocol STOPPED:]');
+                    this.echo('[[;yellow;]Personel Name: Sheepy]');
+                    this.error('Health Critial - Please Seek Medical Attention');
+                    this.echo('<img src="IMG_0382.jpg"/>', {raw: true});
+                    this.pop();
+                } else {
+                    this.error('Code not recognised.');
+                    this.pop();
+                }
+            }, {
+                prompt: 'Unique Code: ',
+                name: 'code'
+            });
+        },
+        
 
     }, {
         greetings: greetings.innerHTML
     });
 </script>
 
-</body>
 </body>
 
 </html>

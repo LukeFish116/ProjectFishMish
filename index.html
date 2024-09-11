@@ -3,9 +3,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
- 
 
-/* general styling */
+/* General styling */
 :root {
   --smaller: .75;
 }
@@ -27,19 +26,60 @@ body {
   display: flex;
   font-family: clacon2;
 }
-    
+
 @font-face {
-            font-family: clacon2;
-            src: url("https://webdraft.hu/fonts/classic-console/fonts/clacon2.ttf");
-        }
+  font-family: clacon2;
+  src: url("https://webdraft.hu/fonts/classic-console/fonts/clacon2.ttf");
+}
+
+/* Container styling */
 .container {
   color: green;
   margin: 0 auto;
   text-align: center;
   text-shadow: rgba(102,255,0,0.9) 0px 0px 20px;
-
 }
 
+/* CRT Scan line effect */
+body::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0) 3px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glowing text effect */
+h1, li {
+  color: rgba(0, 255, 0, 0.9);
+  text-shadow: 0px 0px 15px rgba(0, 255, 0, 0.75), 0px 0px 20px rgba(0, 255, 0, 0.5);
+}
+
+/* Flickering effect for text */
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 1;
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.8;
+  }
+}
+
+h1, li {
+  animation: flicker 0.1s infinite;
+}
+
+/* Text styling */
 h1 {
   font-weight: normal;
   letter-spacing: .125rem;
@@ -59,16 +99,6 @@ li span {
   font-size: 4.5rem;
 }
 
-.emoji {
-  display: none;
-  padding: 1rem;
-}
-
-.emoji span {
-  font-size: 4rem;
-  padding: 0 .5rem;
-}
-
 @media all and (max-width: 768px) {
   h1 {
     font-size: calc(1.5rem * var(--smaller));
@@ -81,27 +111,29 @@ li span {
   li span {
     font-size: calc(3.375rem * var(--smaller));
   }
-}   
+}
 
 </style>
 </head>
-    <script> 
-      document.addEventListener('contextmenu', event=> event.preventDefault()); 
-      document.onkeydown = function(e) { 
-      if(event.keyCode == 123) { 
-      return false; 
-      } 
-      if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){ 
-      return false; 
-      } 
-      if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){ 
-      return false; 
-      } 
-      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){ 
-      return false; 
-      } 
-      } 
-      </script> 
+
+<script> 
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) { 
+  if (event.keyCode == 123) { 
+    return false; 
+  } 
+  if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){ 
+    return false; 
+  } 
+  if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){ 
+    return false; 
+  } 
+  if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){ 
+    return false; 
+  } 
+}
+</script>
+
 <body oncontextmenu="return false">
 <script>
 (function () {
@@ -110,7 +142,7 @@ li span {
         hour = minute * 60,
         day = hour * 24;
 
-  // Set the target countdown date to 09/23/2024
+  // Set the target countdown date
   const countDownDate = new Date("09/21/2024").getTime();
 
   const x = setInterval(function() {    
@@ -126,17 +158,13 @@ li span {
     if (distance < 0) {
       document.getElementById("headline").innerText = "SYSTEM RECOVERED";
       document.getElementById("countdown").style.display = "none";
-
       clearInterval(x);
 
-      // Start the sequence of messages and animations
-
-      // After 4 seconds, change the message to "System Booting, Please wait"
+      // Booting sequence
       setTimeout(function() {
         document.getElementById("headline").innerText = "System Booting, Please wait";
       }, 2000);
 
-      // After 5 seconds, start showing animated dots
       setTimeout(function() {
         let dots = "";
         const dotInterval = setInterval(function() {
@@ -148,10 +176,9 @@ li span {
         }, 300);
       }, 3500);
 
-      // After 7 seconds (total), redirect to the new URL
+      // Redirect after 7 seconds
       setTimeout(function() {
         window.location.href = "https://fishincorporated.uk/PROTOCOLFISHMISH";
-
       }, 5500);
     }
   }, 0);
@@ -172,7 +199,5 @@ li span {
   
 </div>
 </body>
-
-
 
 </html>
