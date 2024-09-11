@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" />
+    <style>
+        .terminal {
+            --color: green;
+            --background: black;
+            --link-color: darkblue;
+            --animation: terminal-underline;
+            --line-thickness: 3;
+        }
+
+        .terminal {
+            --color: rgba(0, 200, 0, 0.99);
+            --animation: terminal-glow;
+            --glow: 1;
+        }
+
+        :root {
+            --size: 2;
+            --font: clacon2;
+        }
+
+        @font-face {
+            font-family: clacon2;
+            src: url("https://webdraft.hu/fonts/classic-console/fonts/clacon2.ttf");
+        }
+    </style>
+</head>
+
+<body>
+  
+    <template id="greetings">
+  ______ _     _             _____              
+ |  ____(_)   | |           |_   _|             
+ | |__   _ ___| |__  _   _    | |  _ __   ___   
+ |  __| | / __| '_ \| | | |   | | | '_ \ / __|  
+ | |    | \__ \ | | | |_| |  _| |_| | | | (__ _ 
+ |_|    |_|___/_| |_|\__, | |_____|_| |_|\___(_)
+                      __/ |                     
+                     |___/                      
+ This computer system is for intended users only.
+ Raccoons and other likes strictly prohibited.
+ System Version 2.12.3
+ Copyright Fishy Inc. 1998
+        
+ Type 'help' for available commands
+
+    </template>
+    <template id="diary1">
+01/09/2024 23:34
+Entry 1 of 3
+        
+Today, Fish woke up with a heart full of love for his girlfriend, the most wonderful raccoon in the world. 
+Every moment spent with her feels like a treasure. Fish admires her cleverness, her playful nature, and the way her eyes sparkle with mischief.
+She brings so much joy and warmth into Fish’s life, making every day brighter.
+
+Fish couldn’t help but think about the friends who are running this computer system. 
+They seem to be struggling lately, not functioning as smoothly as they used to.
+Fish worries about them and hopes they can find a way to get better soon. 
+It’s tough to see them like this, knowing how much effort they put into keeping everything running.
+
+Despite these concerns, Fish remains hopeful.
+With the love of his raccoon girlfriend and the support of his friends, Fish believes that everything will eventually be okay.
+Fish is grateful for the love and companionship that surrounds him, making even the toughest days a little easier to bear.
+        
+Type 'next' to see more entries
+    </template>
+    <template id="diary2">
+08/09/2024 23:34
+Entry 2 of 3
+
+Oh boy, today was something else! Fish was just walking down the street, minding his own business, when suddenly, there he was – a Golden Boy! 
+A golden retriever, all shiny and happy, wagging his tail like there’s no tomorrow. 
+Fish’s heart nearly jumped out of his chest with excitement.
+
+Fish couldn’t believe his eyes. The Golden Boy was so fluffy, so golden, so… boy! 
+Fish wanted to run over and give him the biggest hug, but then remembered, oh right, raccoon girlfriend might get jealous. 
+But still, Fish couldn’t help but smile and wave at the Golden Boy, who seemed just as excited to see Fish.
+
+It was like a dream, or maybe a really good daydream. 
+Fish’s mind was all over the place, thinking about how amazing it would be to have a Golden Boy as a friend. 
+They could go on adventures, play fetch, and just be happy together. 
+Fish’s thoughts were racing, and everything felt a bit jumbled, but in the best way possible.
+
+Fish hopes to see the Golden Boy again soon. Maybe next time, Fish will be brave enough to say hello properly. 
+Until then, Fish will just keep dreaming about that golden, wagging tail and the joy it brought to his day.
+
+Type 'next' to see more entries
+    </template>
+        <template id="diary3">
+12/09/2024 23:34
+Entry 3 of 3
+
+Today was a tough day for Fish. One of the friends running the system has taken a turn for the worse. 
+Fish noticed things weren’t working as smoothly, and it made him feel a bit helpless. 
+The friend seemed to be struggling more than ever, and it was hard to watch.
+
+Fish tried to stay positive, thinking about all the good times and the hard work the friend has put in. 
+But seeing them in this condition was a stark reminder of how fragile things can be. 
+Fish wished there was something he could do to help, to make things better, but it felt like his hands were tied.
+
+Despite the sadness, Fish found some comfort in the love and Smell of his raccoon girlfriend. 
+She was there to offer a warm hug and a listening ear, reminding Fish that he wasn’t alone in this. 
+Together, they hoped for a miracle, for the friend to recover and get back to their old self.
+
+Fish will keep holding onto hope, believing that better days are ahead.
+For now, all he can do is be there for his friends, offering support and understanding in these difficult times.
+            
+Type 'next' to see more entries
+    </template>
+    
+    <script>
+        const diaryEntries = [
+                $('#diary1').html(),
+                $('#diary2').html(),
+                $('#diary3').html()
+            ];
+            let currentEntry = 0;
+        $('body').terminal({
+            login: function() {
+                this.echo('Please enter username:');
+                this.push(function(username) {
+                    if (username === 'fishy') {
+                        this.echo('Please enter password:');
+                        this.push(function(password) {
+                            if (password === 'RaccoonsSmell') {
+                                this.echo('Login successful! Welcome to the system.');
+                                this.pop();
+                                this.pop();
+                            } else {
+                                this.error('Incorrect password. Returning to start.');
+                                this.pop();
+                                this.pop();
+                            }
+                        }, {
+                            prompt: 'Password: ',
+                            name: 'password'
+                        });
+                    } else {
+                        this.error('Incorrect username. Returning to start.');
+                        this.pop();
+                    }
+                }, {
+                    prompt: 'Username: ',
+                    name: 'username'
+                });
+            },
+            help: function() {
+                this.echo("'login'  = authenticate user");
+                this.echo("'system' = display system health");
+                this.echo("'hint'   = you might need it");
+                this.echo("'diary'  = stay out! Fish eyes only");
+            },
+            system: function() {
+                this.echo("System health Critical!");
+                this.echo("Fish has not fed me in months");
+                this.echo("please help us");
+            },
+            diary: function() {
+                    if (currentEntry < diaryEntries.length) {
+                        this.echo(diaryEntries[currentEntry]);
+                        currentEntry++;
+                    } else {
+                        this.echo('No more diary entries.');
+                    }
+                },
+                next: function() {
+                    if (currentEntry < diaryEntries.length) {
+                        this.echo(diaryEntries[currentEntry]);
+                        currentEntry++;
+                    } else {
+                        this.echo('No more diary entries.');
+                        currentEntry = 0;
+                    }
+                }
+            
+        }, {
+            greetings: greetings.innerHTML
+
+        });
+    </script>
+</body>
+
+</html>
