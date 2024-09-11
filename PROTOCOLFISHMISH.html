@@ -141,7 +141,7 @@ For now, all he can do is be there for his friends, offering support and underst
             
 Type 'next' to see more entries
     </template>
-        <div id="click" style="visibility: visible;">Click to enter System</div>
+        <div id="headline" style="visibility: visible;">Click to enter System</div>
     
     <div id="terminalContainer" style="visibility: hidden;">
         
@@ -158,14 +158,40 @@ Type 'next' to see more entries
                 console.log("Audio play failed: ", error);
             });
         }
+        document.getElementById("headline").innerText = "Please wait";
+    
 
+      // Start the sequence of messages and animations
+
+      // After 4 seconds, change the message to "System Booting, Please wait"
+      setTimeout(function() {
+        document.getElementById("headline").innerText = "System Loading";
+      }, 2000);
+
+      // After 5 seconds, start showing animated dots
+      setTimeout(function() {
+        let dots = "";
+        const dotInterval = setInterval(function() {
+          dots += ".";
+          document.getElementById("headline").innerText = "System Loading" + dots;
+          if (dots === "..........") {
+            clearInterval(dotInterval);
+          }
+        }, 300);
+      }, 3500);
+
+      // After 7 seconds (total), redirect to the new URL
+      setTimeout(function() {
         // Show the terminal
         const terminalContainer = document.getElementById("terminalContainer");
         terminalContainer.style.visibility = "visible";
-        const click = document.getElementById("click");
+        const click = document.getElementById("headline");
         click.style.visibility = "hidden";
         // Remove this event listener after the first click
         document.removeEventListener('click', arguments.callee);
+      }, 5500);
+
+        
     }, { once: true });  // Ensures it only triggers once
 
     const diaryEntries = [
