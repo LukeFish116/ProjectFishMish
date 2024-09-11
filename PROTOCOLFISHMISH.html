@@ -9,7 +9,7 @@
         .terminal {
             --color: green;
             --background: black;
-            --link-color: darkblue;
+            --link-color: yellow;
             --animation: terminal-underline;
             --line-thickness: 3;
         }
@@ -29,11 +29,38 @@
             font-family: clacon2;
             src: url("https://webdraft.hu/fonts/classic-console/fonts/clacon2.ttf");
         }
+        body{
+         color: green;
+        margin: 10 auto;
+            font-size: 24px;
+            text-shadow: rgba(102,255,0,0.9) 0px 0px 20px;
+    background-color: black;
+   
+    font-family: clacon2;  
+        }
+        
     </style>
 </head>
+    <script> 
+      document.addEventListener('contextmenu', event=> event.preventDefault()); 
+      document.onkeydown = function(e) { 
+      if(event.keyCode == 123) { 
+      return false; 
+      } 
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){ 
+      return false; 
+      } 
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){ 
+      return false; 
+      } 
+      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){ 
+      return false; 
+      } 
+      } 
+      </script> 
+    <body oncontextmenu="return false">
+    <audio id="helpAudio" src="sound.mp3" type="audio/mp3"></audio>
 
-<body>
-  
     <template id="greetings">
   ______ _     _             _____              
  |  ____(_)   | |           |_   _|             
@@ -44,7 +71,7 @@
                       __/ |                     
                      |___/                      
  This computer system is for intended users only.
- Raccoons and other likes strictly prohibited.
+ Raccoons and other things that Smell are strictly prohibited.
  System Version 2.12.3
  Copyright Fishy Inc. 1998
         
@@ -104,7 +131,7 @@ Fish tried to stay positive, thinking about all the good times and the hard work
 But seeing them in this condition was a stark reminder of how fragile things can be. 
 Fish wished there was something he could do to help, to make things better, but it felt like his hands were tied.
 
-Despite the sadness, Fish found some comfort in the love and Smell of his raccoon girlfriend. 
+Despite the sadness, Fishy found some comfort in the love and sickening Smell of his raccoon girlfriend. 
 She was there to offer a warm hug and a listening ear, reminding Fish that he wasn’t alone in this. 
 Together, they hoped for a miracle, for the friend to recover and get back to their old self.
 
@@ -113,77 +140,124 @@ For now, all he can do is be there for his friends, offering support and underst
             
 Type 'next' to see more entries
     </template>
+        <div id="click" style="visibility: visible;">Click to enter System</div>
     
-    <script>
-        const diaryEntries = [
-                $('#diary1').html(),
-                $('#diary2').html(),
-                $('#diary3').html()
-            ];
-            let currentEntry = 0;
-        $('body').terminal({
-            login: function() {
-                this.echo('Please enter username:');
-                this.push(function(username) {
-                    if (username === 'fishy') {
-                        this.echo('Please enter password:');
-                        this.push(function(password) {
-                            if (password === 'RaccoonsSmell') {
-                                this.echo('Login successful! Welcome to the system.');
-                                this.pop();
-                                this.pop();
-                            } else {
-                                this.error('Incorrect password. Returning to start.');
-                                this.pop();
-                                this.pop();
-                            }
-                        }, {
-                            prompt: 'Password: ',
-                            name: 'password'
-                        });
-                    } else {
-                        this.error('Incorrect username. Returning to start.');
-                        this.pop();
-                    }
-                }, {
-                    prompt: 'Username: ',
-                    name: 'username'
-                });
-            },
-            help: function() {
-                this.echo("'login'  = authenticate user");
-                this.echo("'system' = display system health");
-                this.echo("'hint'   = you might need it");
-                this.echo("'diary'  = stay out! Fish eyes only");
-            },
-            system: function() {
-                this.echo("System health Critical!");
-                this.echo("Fish has not fed me in months");
-                this.echo("please help us");
-            },
-            diary: function() {
-                    if (currentEntry < diaryEntries.length) {
-                        this.echo(diaryEntries[currentEntry]);
-                        currentEntry++;
-                    } else {
-                        this.echo('No more diary entries.');
-                    }
-                },
-                next: function() {
-                    if (currentEntry < diaryEntries.length) {
-                        this.echo(diaryEntries[currentEntry]);
-                        currentEntry++;
-                    } else {
-                        this.echo('No more diary entries.');
-                        currentEntry = 0;
-                    }
-                }
-            
-        }, {
-            greetings: greetings.innerHTML
+    <div id="terminalContainer" style="visibility: hidden;">
+        
+        <div id="terminal"></div>
+    </div>
 
-        });
-    </script>
+<script>
+    // Play audio and show the terminal when the user clicks the first time
+    document.addEventListener('click', function() {
+        const audio = document.getElementById("helpAudio");
+        if (audio) {
+            audio.volume = 0.5;
+            audio.play().catch(error => {
+                console.log("Audio play failed: ", error);
+            });
+        }
+
+        // Show the terminal
+        const terminalContainer = document.getElementById("terminalContainer");
+        terminalContainer.style.visibility = "visible";
+        const click = document.getElementById("click");
+        click.style.visibility = "hidden";
+        // Remove this event listener after the first click
+        document.removeEventListener('click', arguments.callee);
+    }, { once: true });  // Ensures it only triggers once
+
+    const diaryEntries = [
+        $('#diary1').html(),
+        $('#diary2').html(),
+        $('#diary3').html()
+    ];
+    let currentEntry = 0;
+
+    $('#terminal').terminal({
+        login: function() {
+            this.echo('Please enter username:');
+            this.push(function(username) {
+                if (username === 'Fishy') {
+                    this.echo('Please enter password:');
+                    this.push(function(password) {
+                        if (password === 'RaccoonsSmell') {
+                            this.echo('Login successful! Welcome Luke.');
+                            this.error("You have 2 unread messages, to read type 'messages'");
+                            this.pop();
+                            this.pop();
+                        } else {
+                            this.error('Incorrect password. Returning to start.');
+                            this.pop();
+                            this.pop();
+                        }
+                    }, {
+                        prompt: 'Password: ',
+                        name: 'password'
+                    });
+                } else {
+                    this.error('Incorrect username. Returning to start.');
+                    this.pop();
+                }
+            }, {
+                prompt: 'Username: ',
+                name: 'username'
+            });
+        },
+        help: function() {
+            this.echo("'login'  = authenticate user");
+            this.echo("'system' = display system health");
+            this.echo("'hint'   = you might need it");
+            this.echo("'diary'  = stay out! Fish eyes only");
+
+            // Play the audio when help is called
+            const audio = document.getElementById("helpAudio");
+            if (audio) {
+                audio.play();
+            }
+        },
+        system: function() {
+            this.error("System health Critical! - Recovered 09/23/2024");
+            this.echo("Fish has not fed me in months");
+            this.echo("please help us");
+        },
+        hint: function() {
+            this.echo("Casing should always be done in Pascal");
+            this.echo("FoqqcbgGaszz");
+            this.echo("only backstabbers eat salad");
+        },
+        messages: function() {
+            this.echo("2024-09-12 10:32 - Personel Sheepy has passed");
+            this.echo("please contact info@fishincorporated.uk and reference case *0330221*");
+            this.echo("2024-09-23 09:32 - ESTHER PLEASE READ");
+            this.echo("hopefully you have read this before Luke has");
+            this.echo("you need to locate where sheepy is, we want our friend back. and if you can get him we will repay you greatly");
+            this.echo("Regards, Your Friends");
+        },
+        diary: function() {
+            if (currentEntry < diaryEntries.length) {
+                this.echo(diaryEntries[currentEntry]);
+                currentEntry++;
+            } else {
+                this.echo('No more diary entries.');
+            }
+        },
+        next: function() {
+            if (currentEntry < diaryEntries.length) {
+                this.echo(diaryEntries[currentEntry]);
+                currentEntry++;
+            } else {
+                this.echo('No more diary entries.');
+                currentEntry = 0;
+            }
+        }
+
+    }, {
+        greetings: greetings.innerHTML
+    });
+</script>
+
+</body>
 </body>
 
 </html>
