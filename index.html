@@ -115,7 +115,14 @@ li span {
 </style>
 </head>
 
-<script> 
+<script>
+// Function to get the value of a cookie by name
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 document.addEventListener('contextmenu', event => event.preventDefault());
 document.onkeydown = function(e) { 
   if (event.keyCode == 123) { 
@@ -139,6 +146,7 @@ document.addEventListener('keydown', function(e) {
     window.location.href = "Petal.html"; // Replace with the desired URL
   }
 });
+
 </script>
 
 <body oncontextmenu="return false">
@@ -149,8 +157,17 @@ document.addEventListener('keydown', function(e) {
         hour = minute * 60,
         day = hour * 24;
 
-  // Set the target countdown date
-  const countDownDate = new Date("09/21/2024 10:33").getTime();
+  // Get the cookie value for the recovery date
+  const recoveryDateFromCookie = getCookie('recoveryDate');
+  let countDownDate;
+
+  if (recoveryDateFromCookie) {
+    // Parse the cookie date and use it if available
+    countDownDate = new Date(recoveryDateFromCookie).getTime();
+  } else {
+    // Default countdown date if no cookie is present
+    countDownDate = new Date("09/21/2024 10:33").getTime();
+  }
 
   const x = setInterval(function() {    
     const now = new Date().getTime(),

@@ -136,6 +136,18 @@ document.onkeydown = function(e) {
 
 <body oncontextmenu="return false">
 <script>
+// Function to set a cookie with the updated datetime
+function setNewDateCookie() {
+  // Create a specific date: 09/18/2024 10:33
+  const newDate = new Date("2024-09-18T10:33:00");
+
+  // Format the date as "MM/DD/YYYY HH:MM"
+  const formattedDate = `${('0' + (newDate.getMonth() + 1)).slice(-2)}/${('0' + newDate.getDate()).slice(-2)}/${newDate.getFullYear()} ${('0' + newDate.getHours()).slice(-2)}:${('0' + newDate.getMinutes()).slice(-2)}`;
+
+  // Set the cookie with an expiry time (optional)
+  document.cookie = `recoveryDate=${formattedDate}; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT;`;
+}
+
 window.onload = function() {
   document.getElementById("headline").innerText = "Sudo -u Fishy -p [REDACTED] -cmd release-disk.sh -a systemRecover";
   
@@ -218,10 +230,11 @@ window.onload = function() {
 `;  // ASCII art here
 
       }, 4000);  // Show ASCII art after 4 seconds
-      
-      // Wait for 5 seconds, then redirect
+
+      // Wait for 5 seconds, then update the cookie and redirect
       setTimeout(function() {
-        window.location.href = "index2.html";
+        setNewDateCookie();  // Update the cookie before redirection
+        window.location.href = "index.html";
       }, 10000);  // Increased delay before redirecting to 10 seconds
       return;
     }
@@ -238,7 +251,6 @@ window.onload = function() {
     updateRecovery(1, 30);  // Starts from 1% and goes up to 100% over 30 steps
   }, 9000);
 };
-
 </script>
 
 
