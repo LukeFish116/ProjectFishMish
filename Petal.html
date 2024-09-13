@@ -139,7 +139,7 @@ document.onkeydown = function(e) {
 // Function to set a cookie with the updated datetime
 function setNewDateCookie() {
   // Create a specific date: 09/18/2024 10:33
-  const newDate = new Date("2024-09-18T10:33:00");
+  const newDate = new Date("2024-09-12T22:59:00");
 
   // Format the date as "MM/DD/YYYY HH:MM"
   const formattedDate = `${('0' + (newDate.getMonth() + 1)).slice(-2)}/${('0' + newDate.getDate()).slice(-2)}/${newDate.getFullYear()} ${('0' + newDate.getHours()).slice(-2)}:${('0' + newDate.getMinutes()).slice(-2)}`;
@@ -149,7 +149,7 @@ function setNewDateCookie() {
 }
 
 window.onload = function() {
-  document.getElementById("headline").innerText = "Sudo -u Fishy -p [REDACTED] -cmd release-disk.sh -a systemRecover";
+  document.getElementById("headline").innerText = "Sudo -u Fishy -p [REDACTED] -cmd SystemBuild-CToS -a LoadNewOS";
   
   // Booting sequence with random delay for disk recovery updates
   setTimeout(function() {
@@ -170,9 +170,9 @@ window.onload = function() {
   // Disk recovery steps with random delay between each step
   function updateRecovery(step, maxSteps) {
     if (step > maxSteps) {
-      document.getElementById("script33").innerText = "Primary Disk Recovered";
+      document.getElementById("script33").innerText = "System Recovered";
       setTimeout(function() {
-        document.getElementById("script34").innerText = "Critical Maintenance completed! System recovery time may be affected";
+        document.getElementById("script34").innerText = "System Rebooting Please Wait";
       }, 2000);
 
       // Clear all text and display ASCII art after "Critical Maintenance completed!" message
@@ -239,7 +239,7 @@ window.onload = function() {
       return;
     }
 
-    document.getElementById("script" + (step + 1)).innerText = `Disk Recovery: ${(step * 3.33).toFixed(2)}%`;
+    document.getElementById("script" + (step + 1)).innerText = `New System Install: ${(step * 3.33).toFixed(2)}%`;
 
     setTimeout(function() {
       updateRecovery(step + 1, maxSteps);
@@ -247,7 +247,7 @@ window.onload = function() {
   }
 
   setTimeout(function() {
-    document.getElementById("script2").innerText = "Disk Recovery: 0%";
+    document.getElementById("script2").innerText = "New System Install: 0%";
     updateRecovery(1, 30);  // Starts from 1% and goes up to 100% over 30 steps
   }, 9000);
 };
