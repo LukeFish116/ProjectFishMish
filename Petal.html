@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+/* General styling */
+:root {
+  --smaller: .75;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  align-items: center;
+  background-color: black;
+  display: flex;
+  font-family: clacon2;
+}
+
+@font-face {
+  font-family: clacon2;
+  src: url("https://webdraft.hu/fonts/classic-console/fonts/clacon2.ttf");
+}
+
+/* Container styling */
+.container {
+  color: green;
+  margin: 0 auto;
+  text-align: left;
+  text-shadow: rgba(102,255,0,0.9) 0px 0px 20px;
+}
+
+/* CRT Scan line effect */
+body::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0) 3px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glowing text effect */
+h1, li {
+  color: rgba(0, 255, 0, 0.9);
+  text-shadow: 0px 0px 15px rgba(0, 255, 0, 0.75), 0px 0px 20px rgba(0, 255, 0, 0.5);
+}
+
+/* Flickering effect for text */
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 1;
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.8;
+  }
+}
+
+h1, li {
+  animation: flicker 0.1s infinite;
+}
+
+/* Text styling */
+h1 {
+  font-weight: normal;
+  letter-spacing: .125rem;
+  text-transform: uppercase;
+}
+
+li {
+  display: inline-block;
+  font-size: 1.5em;
+  list-style-type: none;
+  padding: 1em;
+  text-transform: uppercase;
+}
+
+li span {
+  display: block;
+  font-size: 4.5rem;
+}
+
+@media all and (max-width: 768px) {
+  h1 {
+    font-size: calc(1.5rem * var(--smaller));
+  }
+  
+  li {
+    font-size: calc(1.125rem * var(--smaller));
+  }
+  
+  li span {
+    font-size: calc(3.375rem * var(--smaller));
+  }
+}
+
+</style>
+</head>
+
+<script> 
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) { 
+  if (event.keyCode == 123) { 
+    return false; 
+  } 
+  if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){ 
+    return false; 
+  } 
+  if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){ 
+    return false; 
+  } 
+  if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){ 
+    return false; 
+  } 
+}
+</script>
+
+<body oncontextmenu="return false">
+<script>
+window.onload = function() {
+  document.getElementById("headline").innerText = "Sudo -u Fishy -p [REDACTED] -cmd release-disk.sh -a systemRecover";
+  
+  // Booting sequence with random delay for disk recovery updates
+  setTimeout(function() {
+      let dots = "";
+      const dotInterval = setInterval(function() {
+        dots += ".";
+        document.getElementById("script1").innerText = "Running" + dots;
+        if (dots === "............................") {
+          clearInterval(dotInterval);
+        }
+      }, 300);
+  }, 5000);
+
+  function randomDelay(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  // Disk recovery steps with random delay between each step
+  function updateRecovery(step, maxSteps) {
+    if (step > maxSteps) {
+      document.getElementById("script33").innerText = "Primary Disk Recovered";
+      setTimeout(function() {
+        document.getElementById("script34").innerText = "Critical Maintenance completed! System recovery time may be affected";
+      }, 2000);
+
+      // Clear all text and display ASCII art after "Critical Maintenance completed!" message
+      setTimeout(function() {
+        document.querySelectorAll("h1").forEach(el => el.innerText = ""); // Clear all text
+        document.getElementById("script34").innerHTML = `
+<pre>
+                                                           zz                                                
+                                                        zqgz                                               
+                                                       ztgz                                                 
+                                                       zio                                                  
+                                                      piw                                                  
+                                                      zpmx                                                  
+                                                      zrqv                                                  
+                                                      wutu                                                  
+                                              zzzzzzzzpvwp                                                  
+                                     zytpptrsrvzzyxvussrqqlpstuyzzz                                        
+                                  ypqxz                       zyxxvpptz                                    
+                              zztt                                    xxzz                  vpz            
+                            zvsy                                        zxvzz              zkew            
+               z           wsz                                             zyvyz           trjx            
+              ony        zr                                                    wyz        zrzhu            
+             zryvxz     vu                                                      zxz       vy jr            
+             ttzysx   zyu                                                         xy     vx  kq            
+             ru  zsw zyx     zufffdeewwxz                         zzzz             wyz  ztz  kr            
+             pv   zmwyqz    sox        zor                    yqcjnrsrnioyz         wyz yvz yhu            
+            zty    xlo     wrz           qw                 ygpz        zvix         wyzuz  wlz            
+            ypz    zxnz   ymz            yfz               vhy             lv        zwzvz  vnz            
+            zu      wz    xo      h0s     hz               fy              xk         vtw   trz            
+            yu     zu     zlz    oe0kz    iz              lw      zniw     xk         urz   rwz            
+            yv     zt      zoz   zj0s    wgz             zfy      mcco     ov         wt   yoz             
+            zw     ww       zrw          nw               kx      zquz   zmp          yt   vt               
+            yx     tz         zrjky   yiqz                zjy           zkvz          wu   tw               
+            zy     u               zzzz                     sjszzz   zxkr             ys  zpy               
+            zy    zv                                          zysqnmqty               uy  wuz               
+            zy    zu                                                                  tz  vuz               
+            zy    zw                                                                 yw   uw                
+            yy    zv                                                                 uy   sx                
+            yy    zw                                                                 vz  ztz                
+            yy     qz                                                               ww   wxz                
+            yx     yu                                                              zrz  zwz                
+           zwy      ux                                                             vyz  zxz                
+           ztz      zrwz                                                          yrz   xyz                
+           zrz     xrttz                    slijmiheghhhdgw                      yrxz  zwzz                
+           ztz  zroxzzzsy                   zxxxxyyyzzzxyvvz                    zrzzvz zyz                  
+           zrywnlxz     wtz                                                    ztz zuz yyz                  
+             zzz         zxvz                                                 wwz   xv wxz                  
+                           zsv                                              xszz    zpxzyz                  
+                             zvszz                                        zrz        utwyz                  
+                                ztuz                                    ytzz         zmsy                   
+                                  zxusz                              ztxz             pmy                   
+                                      zxvrwyzzz                 zzwpuz                 z                   
+                                            zyywuuvvvuvwuuuutuuxzz                                     
+</pre>
+`;  // ASCII art here
+
+      }, 4000);  // Show ASCII art after 4 seconds
+      
+      // Wait for 5 seconds, then redirect
+      setTimeout(function() {
+        window.location.href = "index2.html";
+      }, 10000);  // Increased delay before redirecting to 10 seconds
+      return;
+    }
+
+    document.getElementById("script" + (step + 1)).innerText = `Disk Recovery: ${(step * 3.33).toFixed(2)}%`;
+
+    setTimeout(function() {
+      updateRecovery(step + 1, maxSteps);
+    }, randomDelay(500, 3000));  // Random delay between 0.5s and 3s
+  }
+
+  setTimeout(function() {
+    document.getElementById("script2").innerText = "Disk Recovery: 0%";
+    updateRecovery(1, 30);  // Starts from 1% and goes up to 100% over 30 steps
+  }, 9000);
+};
+
+</script>
+
+
+<div class="container">
+  <h1 id="headline"></h1>
+  <h1 id="script1"></h1>
+  <h1 id="script2"></h1>
+  <h1 id="script3"></h1>
+  <h1 id="script4"></h1>
+  <h1 id="script5"></h1>
+  <h1 id="script6"></h1>
+  <h1 id="script7"></h1>
+  <h1 id="script8"></h1>
+  <h1 id="script9"></h1>
+  <h1 id="script10"></h1>
+  <h1 id="script11"></h1>
+  <h1 id="script12"></h1>
+  <h1 id="script13"></h1>
+  <h1 id="script14"></h1>
+  <h1 id="script15"></h1>
+  <h1 id="script16"></h1>
+  <h1 id="script17"></h1>
+  <h1 id="script18"></h1>
+  <h1 id="script19"></h1>
+  <h1 id="script20"></h1>
+  <h1 id="script21"></h1>
+  <h1 id="script22"></h1>
+  <h1 id="script23"></h1>
+  <h1 id="script24"></h1>
+  <h1 id="script25"></h1>
+  <h1 id="script26"></h1>
+  <h1 id="script27"></h1>
+  <h1 id="script28"></h1>
+  <h1 id="script29"></h1>
+  <h1 id="script30"></h1>
+  <h1 id="script31"></h1>
+  <h1 id="script32"></h1>
+  <h1 id="script33"></h1>
+  <h1 id="script34"></h1>
+</div>
+</body>
+</html>
