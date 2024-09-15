@@ -289,6 +289,7 @@ Type 'next' to see more entries
             this.echo("'system' = display system health");
             this.echo("'hint'   = you might need it");
             this.echo("'diary'  = stay out! Fish eyes only");
+            this.echo("[[;cyan;]'code'");
 
         },
         system: function() {
@@ -333,13 +334,15 @@ Type 'next' to see more entries
                     this.echo('[[;yellow;]Bereavement Protocol Started:]');
                     this.echo('[[;yellow;]Personel Name: Sheepy]');
                     this.echo('[[;yellow;]Employment Duration: 24 Years 234 days]');
-                    this.echo('[[;cyan;]Location: ///rival.jammy.molars]');
+                    this.echo('[[;cyan;]///insulated.armed.rare]');
+                    this.echo("[[;cyan;]From nature's spiral to stored energy, their union holds the key.");
+                    this.echo('<img src="unnamedhint.jpg"/>', {raw: true});
                     this.error('Bereavement Protocol will be completed in 3 days');
                     this.error('EFFECTS IRREVERSIBLE');
                     this.echo("Please contact info@fishincorporated.uk and reference case *0330221*");
                     this.echo("Extentisons can be granted on case by case basis");
                     this.pop();
-                } else if (code === 'FISHYMISHY')  {
+                } else if (code === 'SpiralPower' || code === 'ShellBattery')  {
                     this.echo('[[;yellow;]Bereavement Protocol STOPPED:]');
                     this.echo('[[;yellow;]Personel Name: Sheepy]');
                     this.error('Health Critial - Please Seek Medical Attention');
