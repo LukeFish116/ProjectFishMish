@@ -345,8 +345,9 @@ Type 'next' to see more entries
                 } else if (code === 'SpiralPower' || code === 'ShellBattery')  {
                     this.echo('[[;yellow;]Bereavement Protocol STOPPED:]');
                     this.echo('[[;yellow;]Personel Name: Sheepy]');
+                    this.echo('[[;yellow;]W13DEF]');
                     this.error('Health Critial - Please Seek Medical Attention');
-                    this.echo('<img src="IMG_0382.jpg"/>', {raw: true});
+                    this.echo('<div style="height: calc(100% - 1000px); overflow: hidden; display: inline-block;"> <img src="sheep.gif" alt="Sheep GIF"/> </div>', {raw: true});
                     this.pop();
                 } else {
                     this.error('Code not recognised.');
